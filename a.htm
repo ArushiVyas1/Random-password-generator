@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Password Generator</title>
+    <link rel="stylesheet" href="sheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+</head>
+
+<body>
+    <div class="container">
+        <h1>Generate A <br><span>Random Password</span></h1>
+        <div class="display">
+            <input type="text" id="password" placeholder="Password" readonly>
+            <img src="copy.png" id="copyBtn" alt="Copy Password">
+        </div>
+        <button id="generateBtn"><i class="fas fa-bolt" style="color: black;"> Generate Password</i>
+        </button>
+
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const passwordBox = document.getElementById("password");
+            const passwordLength = 12;
+            const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            const lowerCase = "abcdefghijklmnopqrstuvwxyz";
+            const number = "0123456789";
+            const symbol = "@#$%^&*()_-+{}[]<>/*";
+            const allChars = upperCase + lowerCase + number + symbol;
+
+            function createPassword() {
+                let password = "";
+                password += upperCase[Math.floor(Math.random() * upperCase.length)];
+                password += lowerCase[Math.floor(Math.random() * lowerCase.length)];
+                password += number[Math.floor(Math.random() * number.length)];
+                password += symbol[Math.floor(Math.random() * symbol.length)];
+                while (password.length < passwordLength) {
+                    password += allChars[Math.floor(Math.random() * allChars.length)];
+                }
+                passwordBox.value = password;
+            }
+
+            async function copyPassword() {
+                if (passwordBox.value) {
+                    try {
+                        await navigator.clipboard.writeText(passwordBox.value);
+                        alert("Password copied to clipboard!");
+                    } catch (err) {
+                        alert("Failed to copy password!");
+                    }
+                } else {
+                    alert("No password to copy!");
+                }
+            }
+            document.getElementById("generateBtn").onclick = createPassword;
+            document.getElementById("copyBtn").onclick = copyPassword;
+        });
+
+    </script>
+</body>
+
+</html>
