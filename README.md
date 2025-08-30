@@ -20,3 +20,16 @@ CSS (via external stylesheet sheet.css) for styling and layout.
 JavaScript for password generation logic and clipboard interaction.
 
 Font Awesome 5.15.4 for iconography.
+
+# How It Works
+1. Generate Password:
+When the "Generate Password" button is clicked, a function creates a random password by:
+
+Selecting at least one character from uppercase letters, lowercase letters, numbers, and symbols.
+
+Filling the remaining password length with random characters from all character sets.
+
+Displaying the password in a readonly input field.
+
+2. Copy Password:
+Clicking the copy icon triggers the Clipboard API to copy the password. Success or failure is communicated via alert messages.
